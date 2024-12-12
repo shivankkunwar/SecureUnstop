@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { Eye, EyeOff, Mail, User, Lock } from 'lucide-react';
 import '../styles/login.css';
 import { useAuth } from '../context/AuthContext';
@@ -64,8 +64,9 @@ export default function LoginPage() {
           email: formData.email,
           expiresInMins: 30
         })
-      } catch (error) {
-        alert('Login failed. Please use the credentials: username: kminchelle, password: 0lelplR')
+      } catch (e) {
+        console.error(e);
+        alert('Login failed. PLease use this credentials username: emilys , email: emily.johnson@x.dummyjson.com , password :  emilyspass',)
       }
     }
   }

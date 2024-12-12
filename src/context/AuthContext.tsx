@@ -1,9 +1,22 @@
+
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface AuthContextType {
-  user: any
-  login: (data: any) => Promise<void>
+  user: {
+    id:number,
+    firstName:string,
+    lastName: string,
+    password: string,
+    email:string
+  }
+  
+  login: (data: {
+    username: string,
+    password: string,
+    email: string,
+    expiresInMins: number
+  }) => Promise<void>
   logout: () => void
 }
 
@@ -21,8 +34,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [navigate])
 
-  const login = async (data: any) => {
-    try {
+  const login = async (data:{
+    username: string,
+    password: string,
+    email: string,
+    expiresInMins: number
+  }) => {
+   
       const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,9 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('user', JSON.stringify(userData))
       setUser(userData)
       navigate('/home')
-    } catch (error) {
-      throw error
-    }
+   
   }
 
   const logout = () => {
