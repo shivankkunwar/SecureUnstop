@@ -9,7 +9,7 @@ interface AuthContextType {
     lastName: string,
     password: string,
     email:string
-  }
+  }|null
   
   login: (data: {
     username: string,
